@@ -1,6 +1,23 @@
+"use client"
 
+import { useEffect, useState } from "react";
+import { load } from "./func";
 
 export default function Home() {
+    const [refresh, setRefresh] = useState(true);
+    
+  useEffect(
+    ()=>{
+      if(!refresh)return;
+      setRefresh(false);
+      load().then((e) => {
+        
+        console.log("Account: ",e.addressAccount);
+        console.log("Contract: ",e.contract)
+      });
+    },[]
+  )
+
   return (
     <div className="min-h-screen pb-8 gap-16 backdrop-blur-lg" style={{
       background:"linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),URL(/back.jpg)",
